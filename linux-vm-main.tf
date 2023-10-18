@@ -23,6 +23,14 @@ resource "aws_instance" "linux-server" {
     delete_on_termination = true
     encrypted             = true
   }
+  #extra disk
+  ebs_block_device {
+    device_name           = "/dev/xvda"
+    volume_size           = 10
+    volume_type           = gp2
+    encrypted             = true
+    delete_on_termination = true
+  }
   
   tags = {
     Name        = "${lower(var.app_name)}-${each.key}"
