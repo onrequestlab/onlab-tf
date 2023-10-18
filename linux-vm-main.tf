@@ -22,10 +22,32 @@ resource "aws_instance" "linux-server" {
     volume_type           = "gp2"
     delete_on_termination = true
     encrypted             = true
+  }  
+  tags = {
+    Name        = "${lower(var.app_name)}-${each.key}"
+    Environment = var.app_environment
   }
-  #extra disk
+}
+
+resource "aws_instance" "iscsi-server" {
+  for_each                    = var.instance_names_iscsi
+  ami                         = "ami-0763cf792771fe1bd"
+  instance_type               = "t2.micro"
+  subnet_id                   = data.aws_subnet.default.id
+  vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
+  associate_public_ip_address = false
+  key_name                    = data.aws_key_pair.example.key_name
+  
+  # root disk
+  root_block_device {
+    volume_size           = 20
+    volume_type           = "gp2"
+    delete_on_termination = true
+    encrypted             = true
+  }
+    #extra disk
   ebs_block_device {
-    device_name           = "/dev/xvda"
+    device_name           = "/dev/sdd"
     volume_size           = 10
     volume_type           = "gp2"
     encrypted             = true
