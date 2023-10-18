@@ -27,7 +27,7 @@ resource "aws_instance" "linux-server" {
   ebs_block_device {
     device_name           = "/dev/xvda"
     volume_size           = 10
-    volume_type           = gp2
+    volume_type           = "gp2"
     encrypted             = true
     delete_on_termination = true
   }
