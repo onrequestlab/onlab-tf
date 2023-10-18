@@ -27,3 +27,10 @@ variable "instance_names" {
     "nodec"  = "4"
   }
 }
+
+variable "instance_names_iscsi" {
+  default = {
+    "iscsi_target" = "1"
+    "iscsi_client"  = "2"
+  }
+}
