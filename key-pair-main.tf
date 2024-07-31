@@ -3,5 +3,5 @@
 #####################
 
 data "aws_key_pair" "example" {
-  key_name           = "onreqlab"
+  key_name           = "onelab"
 }
