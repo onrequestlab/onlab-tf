@@ -18,7 +18,7 @@ resource "aws_instance" "linux-server" {
   instance_type               = "t3a.micro"
   subnet_id                   = data.aws_subnet.default.id
   vpc_security_group_ids      = [aws_security_group.aws-linux-sg.id]
-  associate_public_ip_address = true
+  associate_public_ip_address = false
   key_name                    = data.aws_key_pair.example.key_name
 
   # root disk
